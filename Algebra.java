@@ -6,36 +6,39 @@
 public class Algebra {
 	public static void main(String args[]) {
 		// Tests some of the operations
-
+		// System.out.println("plus");
 		// System.out.println(plus(2, 3)); // 2 + 3
 		// System.out.println(plus(-5, -3)); // -5 + (-3)= -8
 		// System.out.println(plus(-2, 3)); // -2 + 3
 		// System.out.println(plus(2, -4));// 2 + (-4)
-
+		// System.out.println("minus");
 		// System.out.println(minus(7, 2)); // 7 - 2
 		// System.out.println(minus(2, 7)); // 2 - 7
 		// System.out.println(minus(-5, -3)); // -5 - (-3)= -2
 		// System.out.println(minus(-3, -6)); // -3 - (-6)=3
-
+		// System.out.println("times");
 		// System.out.println(times(3, 4)); // 3 * 4
 		// System.out.println(plus(2, times(4, 2))); // 2 + 4 * 2
 		// System.out.println(times(-3, 5));
 		// System.out.println(times(-3, -5));
 		// System.out.println(times(3, -5));
-
+		// System.out.println("pow");
 		// System.out.println(pow(5, 3)); // 5^3
 		// System.out.println(pow(3, 5)); // 3^5
 		// System.out.println(pow(-2, 3));
 		// System.out.println(pow(1, 10));
 
-		System.out.println(div(12, 3)); // 12 / 3
+		// System.out.println("div");
 		// System.out.println(div(5, 5)); // 5 / 5
 		// System.out.println(div(25, 7)); // 25 / 7
-		// System.out.println(div(-4, -2));
+		// System.out.println(div(-15, -3));
+		System.out.println(div(12, 4));
 
+		// System.out.println("mod");
 		// System.out.println(mod(25, 7)); // 25 % 7
 		// System.out.println(mod(120, 6)); // 120 % 6
 
+		// System.out.println("sqrt");
 		// System.out.println(sqrt(36));
 		// System.out.println(sqrt(263169));
 		// System.out.println(sqrt(76123));
@@ -197,6 +200,7 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2
 	public static int div(int x1, int x2) {
+		int sum = 0;
 		if (x2 == 1) {
 			return x1;
 		} else if (x1 == 0) {
@@ -206,22 +210,46 @@ public class Algebra {
 		} else if (x1 == x2) {
 			return 1;
 		}
-		int sum = 0;
 		// 2 numbers positive
-		if (x1 > 0 && x2 > 0) {
-			while (minus(x1, x2) >= 0) {
+		else if (x1 > 0 && x2 > 0 && x1 > x2) {
+			sum++;
+			// while (minus(x1, x2) >= 0) {
+			// sum++;
+			// x1 = minus(x1, x2);
+			// System.out.println("sum= " + sum + " x1= " + x1);
+
+			// }
+			System.out.println("s= " + sum);
+			while (plus(x2, x2) <= x1) {
 				sum++;
-				x1 = minus(x1, x2);
+				x2 = plus(x2, x2);
+				System.out.println("sum= " + sum + " x2 = " + x2 + " x1=" + x1);
 			}
 		}
 		// 2 numbers negative
-		if (x1 < 0 && x2 < 0) {
-			x1 = times(x1, -1);
-			x2 = times(x2, -1);
-			while (minus(x1, x2) >= 0) {
-				sum++;
-				x1 = minus(x1, x2);
+		else if (x1 < 0 && x2 < 0) {
+			if (x1 > x2) {
+				sum = 0;
 			}
+
+			else if (x1 < x2) {
+				sum++;
+
+				while (minus(x1, x2) != 0) {
+					if (minus(x1, x2) <= 0) {
+						sum++;
+						x1 = minus(x1, x2);
+						System.out.println("sum= " + sum + " x1= " + x1);
+					}
+
+				}
+
+			}
+
+		}
+
+		if (x1 < 0 && x2 > 0) {
+
 		}
 
 		return sum;
@@ -229,9 +257,12 @@ public class Algebra {
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		int sum = minus(x1, times(div(x1, x2), x2));
-		if (sum == 0) {
+		int sum = 0;
+		if (minus(x1, times(div(x1, x2), x2)) == 0) {
 			return 0;
+		} else {
+			sum = minus(x1, times(div(x1, x2), x2));
+
 		}
 		return sum;
 	}
