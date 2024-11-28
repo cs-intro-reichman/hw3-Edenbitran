@@ -32,7 +32,7 @@ public class LoanCalc {
     // periodical payment.
     private static double endBalance(double loan, double rate, int n, double payment) {
         rate = 1 + (rate / 100);
-        loan *= rate;
+        loan = (loan - payment) * rate;
         for (int i = 1; i < n; i++) {
             loan = (loan - payment) * rate;
         }
@@ -61,20 +61,21 @@ public class LoanCalc {
     // Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {
         iterationCounter = 0;
-        double low = 0;
+        double low = loan/n;
         double high = loan * rate;
         double mid = (low + high) / 2.0;
-         double currenPay;
-        while ((high-low)> epsilon) {
+        double currenPay=(endBalance(loan, rate, n, mid));
+         while ((high - low) > epsilon) {
             currenPay = endBalance(loan, rate, n, mid);
                 if (currenPay < 0) {
-                low = mid;
+                high = mid;
                 mid = (low + high) / 2;
             } else {
-                high = mid;
+                low = mid;
                 mid = (low + high) / 2;
             }
             iterationCounter++;
+            System.out.println("iter- "+iterationCounter+" mid- "+mid);
         }
         return mid;
     }
