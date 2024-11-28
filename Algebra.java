@@ -219,11 +219,9 @@ public class Algebra {
 			// System.out.println("sum= " + sum + " x1= " + x1);
 
 			// }
-			System.out.println("s= " + sum);
 			while (plus(x2, x2) <= x1) {
 				sum++;
 				x2 = plus(x2, x2);
-				System.out.println("sum= " + sum + " x2 = " + x2 + " x1=" + x1);
 			}
 		}
 		// 2 numbers negative
@@ -249,7 +247,7 @@ public class Algebra {
 		}
 
 		if (x1 < 0 && x2 > 0) {
-
+			
 		}
 
 		return sum;
