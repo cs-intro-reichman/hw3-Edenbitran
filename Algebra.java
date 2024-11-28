@@ -29,14 +29,16 @@ public class Algebra {
 		// System.out.println(pow(1, 10));
 
 		// System.out.println("div");
-		// System.out.println(div(5, 5)); // 5 / 5
-		// System.out.println(div(25, 7)); // 25 / 7
-		// System.out.println(div(-15, -3));
-		System.out.println(div(12, 4));
+		 //System.out.println(div(5, 5)); // 5 / 5
+		 //System.out.println(div(25, 7)); // 25 / 7
+		  //System.out.println(div(-15, -3));
+		 //System.out.println(div(12, 4));
+		 // System.out.println(div(15, -3));
 
 		// System.out.println("mod");
-		// System.out.println(mod(25, 7)); // 25 % 7
-		// System.out.println(mod(120, 6)); // 120 % 6
+		System.out.println(mod(25, 7)); // 25 % 7
+		System.out.println(div(120, 6));
+		System.out.println(mod(12, 6)); // 120 % 6
 
 		// System.out.println("sqrt");
 		// System.out.println(sqrt(36));
@@ -212,42 +214,48 @@ public class Algebra {
 		}
 		// 2 numbers positive
 		else if (x1 > 0 && x2 > 0 && x1 > x2) {
+			int x = x2;
 			sum++;
-			// while (minus(x1, x2) >= 0) {
-			// sum++;
-			// x1 = minus(x1, x2);
-			// System.out.println("sum= " + sum + " x1= " + x1);
-
-			// }
-			while (plus(x2, x2) <= x1) {
+			if (minus(x1, x) >= x2) {
 				sum++;
-				x2 = plus(x2, x2);
+				x1 = minus(x1, x);
+				while (minus(x1, x) >= x2) {
+				x1 = minus(x1, x);
+						sum++;
+				 }	
 			}
 		}
 		// 2 numbers negative
 		else if (x1 < 0 && x2 < 0) {
 			if (x1 > x2) {
 				sum = 0;
-			}
-
-			else if (x1 < x2) {
+			} else if (x1 < x2) {
 				sum++;
-
 				while (minus(x1, x2) != 0) {
 					if (minus(x1, x2) <= 0) {
 						sum++;
 						x1 = minus(x1, x2);
-						System.out.println("sum= " + sum + " x1= " + x1);
 					}
-
 				}
-
 			}
-
 		}
-
-		if (x1 < 0 && x2 > 0) {
-			
+		// if one of the numbers is negative
+		else if ((x1 > 0 && x2 < 0) || (x1 < 0 && x2 > 0)) {
+			if (x1 < 0) {
+				x1 = times(x1, -1);
+			}
+			else if (x2 < 0) {
+				x2 = times(x2, -1);
+			}
+			if (x1 > x2) {
+				sum++;
+				int x = x2;
+				while ((plus(x2, x) <= x1)) {
+					x2 = plus(x2, x);
+					sum++;
+				}
+			}
+			sum = times(sum, -1);
 		}
 
 		return sum;
@@ -256,12 +264,12 @@ public class Algebra {
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		int sum = 0;
-		if (minus(x1, times(div(x1, x2), x2)) == 0) {
-			return 0;
-		} else {
-			sum = minus(x1, times(div(x1, x2), x2));
-
-		}
+		sum = minus(x1, times(div(x1, x2), x2));
+		 if (minus(x1, times(div(x1, x2), x2)) == 0) {
+		 	return 0;
+		 } else {
+		 	sum = minus(x1, times(div(x1, x2), x2));
+		 }
 		return sum;
 	}
 
